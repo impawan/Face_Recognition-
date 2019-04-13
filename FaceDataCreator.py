@@ -6,8 +6,9 @@ Created on Tue Feb 27 22:18:25 2018
 """
 
 import cv2
-import numpy as np
+from PIL import Image
 
+    
 def config_manager(name):
     config_file = open("config.config",'r+')
     lines = config_file.readlines()
@@ -40,7 +41,7 @@ face_cascade = cv2.CascadeClassifier("classfier.xml")
 
 cap = cv2.VideoCapture(0)
 
-name = input("enter the name of the person, no space is allowed :P") 
+name = input("enter the name of the person, no space is allowed >> ") 
 user_key = config_manager(name)
 sampleNo = 0
 while True :
@@ -48,13 +49,15 @@ while True :
     faceCount = 0
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray)
-    sampleNo= sampleNo+1
+    print(faces)
+    if (x,y,w,h) in faces:
+        sampleNo= sampleNo+1
     for (x,y,w,h) in faces:
         cv2.rectangle(frame,(x,y),(x+w,y+h),(125,255,0),2)
         cv2.imwrite("Face_Repo/face_"+str(user_key)+"_"+str(sampleNo)+".jpg",gray[y:y+h,x:x+w]) 
         cv2.waitKey(100)
     cv2.imshow("mirror",frame)    
-    if(sampleNo>20):
+    if(sampleNo>29):
         break
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

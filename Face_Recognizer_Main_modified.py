@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Apr  8 21:48:10 2018
-
-@author: ACER
-"""
 
 # -*- coding: utf-8 -*-
 """
